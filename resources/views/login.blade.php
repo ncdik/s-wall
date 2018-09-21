@@ -49,11 +49,11 @@
             <div class="control-group">
                 <b>Авторизация</b>
             </div>
-            <div class="control-group">
+            <div class="control-group{{ $errors->has('name') ? ' error' : '' }}">
                 <input type="text" id="inputLogin" name="name" placeholder="Логин" data-cip-id="inputLogin"
                        autocomplete="off" value="{{ old('name') }}">
             </div>
-            <div class="control-group">
+            <div class="control-group{{ $errors->has('password') ? ' error' : '' }}">
                 <input type="password" id="inputPassword" name="password" placeholder="Пароль"
                        data-cip-id="inputPassword">
             </div>
