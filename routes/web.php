@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('index', ['messages' => Message::orderBy('created_at', 'desc')->get()]);
 });
 
+Route::get('/w', function() {
+    return view('welcome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

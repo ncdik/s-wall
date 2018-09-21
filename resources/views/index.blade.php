@@ -13,48 +13,56 @@
 
 @csrf
 <input type="hidden" name="_xsrf" value="<?= $_SERVER['HTTP_COOKIE'] ?>" />
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
 
 <div class="navbar">
     <div class="navbar-inner">
         <a class="brand" href="#">Сайтсофт</a>
         <ul class="nav">
             <li class="active"><a href="#">Главная</a></li>
-            <li><a href="#">Авторизация</a></li>
-            <li><a href="#">Регистрация</a></li>
+            @guest
+                <li><a href="{{ route('login') }}">Авторизация</a></li>
+                <li><a href="{{ route('register') }}">Регистрация</a></li>
+            @endguest
         </ul>
 
-        <ul class="nav pull-right">
-            <li><a>Username</a></li>
-            <li><a href="#">Выход</a></li>
-        </ul>
+        @auth
+            <ul class="nav pull-right">
+                <li><a>{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</a></li>
+            </ul>
+        @endauth
     </div>
 </div>
 
 <div class="row-fluid">
     <div class="span2"></div>
     <div class="span8">
-        <form action="" method="post" class="form-horizontal" style="margin-bottom: 50px;">
-            <div id="error_message" class="alert alert-error">
-                Сообщение не может быть пустым, а также состоять только из пробелов
-            </div>
-            <div id="error_key" class="alert alert-error">
-                Ключ не может быть пустым
-            </div>
-
-            <div class="control-group">
-                <textarea style="width: 100%; height: 50px;" type="password" id="inputText" placeholder="Ваше сообщение..."
-                       data-cip-id="inputText"></textarea>
-            </div>
-            <div class="control-group">
-                <button type="button" onclick="tsend();" class="btn btn-primary">Отправить сообщение</button>
-                <button type="button" onclick="crypt();" class="btn btn-primary">Отправить в зашифрованном виде</button>
-                <div class="pull-right">
-                    <label class="label" for="textkey">Ключ</label>
-                    <input type="text" id="textkey" class="input input-large">
+        @auth
+            <form action="" method="post" class="form-horizontal" style="margin-bottom: 50px;">
+                <div id="error_message" class="alert alert-error">
+                    Сообщение не может быть пустым, а также состоять только из пробелов
                 </div>
-            </div>
-            
-        </form>
+                <div id="error_key" class="alert alert-error">
+                    Ключ не может быть пустым
+                </div>
+
+                <div class="control-group">
+                    <textarea style="width: 100%; height: 50px;" type="password" id="inputText" placeholder="Ваше сообщение..."
+                           data-cip-id="inputText"></textarea>
+                </div>
+                <div class="control-group">
+                    <button type="button" onclick="tsend();" class="btn btn-primary">Отправить сообщение</button>
+                    <button type="button" onclick="crypt();" class="btn btn-primary">Отправить в зашифрованном виде</button>
+                    <div class="pull-right">
+                        <label class="label" for="textkey">Ключ</label>
+                        <input type="text" id="textkey" class="input input-large">
+                    </div>
+                </div>
+            </form>
+        @endauth
         
         <div id='messagewell'>
             @foreach ($messages as $message)
