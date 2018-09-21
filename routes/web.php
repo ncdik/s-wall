@@ -14,11 +14,7 @@ use App\Message;
 
 Route::get('/', function () {
     return view('index', ['messages' => Message::orderBy('created_at', 'desc')->get()]);
-});
-
-Route::get('/w', function() {
-    return view('login');
-})->middleware('guest');
+})->name('index');
 
 Auth::routes();
 
