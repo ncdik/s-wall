@@ -35,7 +35,17 @@ class="active"
         <div id='messagewell'>
             @foreach ($messages as $message)
             <div class="well">
-                <h5>{{ @($message->user)->name }} <div class="pull-right" style="font-weight: normal; color:silver;">{{ $message->created_at }}</div></h5>
+                <div class="pull-right" style="font-weight: normal; color:silver; font-size:13px">
+                        Создано - {{ $message->created_at }}
+                        @if ($message->created_at != $message->updated_at)
+                            <br>Обновлено - {{ $message->updated_at }}
+                        @endif
+                    </div>
+
+                <h5>
+                    {{ @($message->user)->name }}
+                    
+                </h5>
 
                     @if($message->crypted)
                         <label id="text_{{ $message->id }}">

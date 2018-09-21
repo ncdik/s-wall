@@ -70,11 +70,6 @@ function crypt() {
     var ikey = $('input[id="textkey"]');
 
     WS.send(crypt_main('beg:' + itext.val() + ':end', ikey.val()));
-    //console.log(crypt_main('beg:' + itext.val() + ':end', ikey.val()));
-    
-//var ires = $('input[name="result"]');
-
-    //ires.val(crypt_main('beg:' + itext.val() + ':end', ikey.val()));
 }
 
 function decrypt() {
@@ -87,7 +82,22 @@ function decrypt() {
 }
 
 function sendOpenMsg(){
-    
+    //--------------------------------------------------------
+    // везде отправлять CSRF-токен, тут обрабатывать данные
+    // и создавать post-запрос к laravel
+    // в котором уже будет обрабатываться CSRF-токен
+    //--------------------------------------------------------
+    // omsg - open message (открытое сообщение) | user_id message
+    // cmsg - crypt message (зашифрованное сообщение) | user_id message
+    // emsg - edit message (редактировать сообщение) | user_id CSRF? message_id new_message
+    // dmsg - delete message (удалить сообщение) | user_id CSRF? message_id
+    //--------------------------------------------------------
+    // op_msg>>_token>>xsrf>>user_id>>JSON.stringify(message)
+    // cr_msg>>_token>>xsrf>>user_id>>crypted_message
+    // eo_msg>>_token>>xsrf>>user_id>>message_id>>JSON.stringify(message)
+    // ec_msg>>_token>>xsrf>>user_id>>message_id>>crypted_message
+    // demsg>>_token>>xsrf>>user_id>>message_id
+    //
 }
 function sendCryptedMsg(){
     
