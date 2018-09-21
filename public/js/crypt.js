@@ -42,8 +42,6 @@ function tstart(){
     return ws;
 }
 
-var WS = tstart();
-
 function filldiv(id, text){
     var ikey = $('#key_'+id);
     $('#text_'+id).text(decrypt_main(text, ikey.val()));
@@ -94,3 +92,10 @@ function sendOpenMsg(){
 function sendCryptedMsg(){
     
 }
+
+function showErrorMessage(){ $('#error_message').show(); }
+function hideErrorMessage(){ $('#error_message').hide(); }
+function showErrorKey(){ $('#error_key').show(); }
+function hideErrorKey(){ $('#error_key').hide(); }
+
+var WS = tstart();

@@ -10,10 +10,10 @@ class="active"
     <div class="span8">
         @auth
             <form action="" method="post" class="form-horizontal" style="margin-bottom: 50px;">
-                <div id="error_message" class="alert alert-error">
+                <div id="error_message" class="alert alert-error" hidden>
                     Сообщение не может быть пустым, а также состоять только из пробелов
                 </div>
-                <div id="error_key" class="alert alert-error">
+                <div id="error_key" class="alert alert-error" hidden>
                     Ключ не может быть пустым
                 </div>
 
