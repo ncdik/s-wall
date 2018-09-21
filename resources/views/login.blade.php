@@ -37,9 +37,11 @@
     <div class="span4"></div>
     <div class="span3">
 
-        <div class="alert alert-error">
-            Вход в систему с указанными данными невозможен
-        </div>
+        @if ($errors->has('name') || $errors->has('password'))
+            <div class="alert alert-error">
+                Вход в систему с указанными данными невозможен
+            </div>
+        @endif
 
         <form action="{{ route('login') }}" method="post" class="form-horizontal">
             @csrf
@@ -49,7 +51,7 @@
             </div>
             <div class="control-group">
                 <input type="text" id="inputLogin" name="name" placeholder="Логин" data-cip-id="inputLogin"
-                       autocomplete="off">
+                       autocomplete="off" value="{{ old('name') }}">
             </div>
             <div class="control-group">
                 <input type="password" id="inputPassword" name="password" placeholder="Пароль"
