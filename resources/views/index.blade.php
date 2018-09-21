@@ -22,7 +22,7 @@ class="active"
                            data-cip-id="inputText"></textarea>
                 </div>
                 <div class="control-group">
-                    <button type="button" onclick="tsend();" class="btn btn-primary">Отправить сообщение</button>
+                    <button type="button" onclick="sendOpenMsg();" class="btn btn-primary">Отправить сообщение</button>
                     <button type="button" onclick="crypt();" class="btn btn-primary">Отправить в зашифрованном виде</button>
                     <div class="pull-right">
                         <label class="label" for="textkey">Ключ</label>
