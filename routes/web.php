@@ -17,8 +17,8 @@ Route::get('/', function () {
 });
 
 Route::get('/w', function() {
-    return view('welcome');
-});
+    return view('login');
+})->middleware('guest');
 
 Auth::routes();
 

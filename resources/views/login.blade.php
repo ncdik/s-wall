@@ -9,19 +9,27 @@
 </head>
 <body>
 
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
 <div class="navbar">
     <div class="navbar-inner">
         <a class="brand" href="#">Сайтсофт</a>
         <ul class="nav">
             <li><a href="/">Главная</a></li>
-            <li class="active"><a href="#">Авторизация</a></li>
-            <li><a href="#">Регистрация</a></li>
+            @guest
+                <li class="active"><a href="{{ route('login') }}">Авторизация</a></li>
+                <li><a href="{{ route('register') }}">Регистрация</a></li>
+            @endguest
         </ul>
 
-        <ul class="nav pull-right">
-            <li><a>Username</a></li>
-            <li><a href="#">Выход</a></li>
-        </ul>
+        @auth
+            <ul class="nav pull-right">
+                <li><a>{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</a></li>
+            </ul>
+        @endauth
     </div>
 </div>
 
