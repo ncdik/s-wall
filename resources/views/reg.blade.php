@@ -9,19 +9,28 @@
 </head>
 <body>
 
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="#">Сайтсофт</a>
+        <a class="brand" href="/">Сайтсофт</a>
         <ul class="nav">
-            <li><a href="#">Главная</a></li>
-            <li><a href="#">Авторизация</a></li>
-            <li class="active"><a href="#">Регистрация</a></li>
+            <li><a href="/">Главная</a></li>
+
+            @guest
+                <li><a href="{{ route('login') }}">Авторизация</a></li>
+                <li class="active"><a href="{{ route('register') }}">Регистрация</a></li>
+            @endguest
         </ul>
 
-        <ul class="nav pull-right">
-            <li><a>Username</a></li>
-            <li><a href="#">Выход</a></li>
-        </ul>
+        @auth
+            <ul class="nav pull-right">
+                <li><a>{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</a></li>
+            </ul>
+        @endauth
     </div>
 </div>
 
@@ -29,24 +38,42 @@
     <div class="span4"></div>
     <div class="span8">
 
-        <form action="" method="post" class="form-horizontal">
+        <form action="{{ route('register') }}" method="post" class="form-horizontal">
+            @csrf
+
             <div class="control-group">
                 <b>Регистрация</b>
             </div>
-            <div class="control-group">
-                <input type="text" id="inputLogin" name="username" placeholder="Логин" data-cip-id="inputLogin"
-                       autocomplete="off">
+            <div class="control-group{{ $errors->has('name') ? ' error' : '' }}">
+                <input type="text" id="name" name="name" placeholder="Логин" data-cip-id="inputLogin"
+                       autocomplete="off" value="{{ old('name') }}">
+                @if ($errors->has('name'))
+                    <span class="help-inline">{{ $errors->first('name') }}</span>
+                @endif
             </div>
-            <div class="control-group error">
+
+            <div class="control-group{{ $errors->has('email') ? ' error' : '' }}">
+                <input type="email" id="inputEmail" name="email" placeholder="E-mail" data-cip-id="inputEmail"
+                       autocomplete="off" value="{{ old('email') }}">
+                @if ($errors->has('email'))
+                    <span class="help-inline">{{ $errors->first('email') }}</span>
+                @endif
+
+            </div>
+
+            <div class="control-group{{ $errors->has('password') ? ' error' : '' }}">
                 <input type="password" id="inputPassword" name="password" placeholder="Пароль"
                        data-cip-id="inputPassword">
-                <span class="help-inline">Текст ошибки</span>
+                @if ($errors->has('password'))
+                    <span class="help-inline">{{ $errors->first('password') }}</span>
+                @endif
             </div>
-            <div class="control-group error">
-                <input type="password" id="inputPassword2" name="password" placeholder="Повторите пароль"
+
+            <div class="control-group">
+                <input type="password" id="password-confirm" name="password_confirmation" placeholder="Повторите пароль"
                        data-cip-id="inputPassword2">
-                <span class="help-inline">Текст ошибки</span>
             </div>
+
             <div class="control-group">
                 <button type="submit" class="btn btn-primary">Отправить</button>
             </div>
