@@ -41,12 +41,14 @@
             Вход в систему с указанными данными невозможен
         </div>
 
-        <form action="" method="post" class="form-horizontal">
+        <form action="{{ route('login') }}" method="post" class="form-horizontal">
+            @csrf
+
             <div class="control-group">
                 <b>Авторизация</b>
             </div>
             <div class="control-group">
-                <input type="text" id="inputLogin" name="username" placeholder="Логин" data-cip-id="inputLogin"
+                <input type="text" id="inputLogin" name="name" placeholder="Логин" data-cip-id="inputLogin"
                        autocomplete="off">
             </div>
             <div class="control-group">
