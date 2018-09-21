@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Message;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index', ['messages' => Message::orderBy('created_at', 'desc')->get()]);
 });
 
 Auth::routes();
