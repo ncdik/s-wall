@@ -4,18 +4,27 @@
     <title>Сайтсофт</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" media="screen">
     <script src="{{ asset('js/jquery-min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/md5.js') }}"></script>
-    <script src="{{ asset('js/crypt.js') }}"></script>
+    @auth
+        <script src="{{ asset('js/md5.js') }}"></script>
+        <script src="{{ asset('js/crypt.js') }}"></script>
+        <script>var WS = tstart('192.168.2.142', '8000');</script>
+    @endauth
 </head>
 <body>
 
 @csrf
-<input type="hidden" name="_xsrf" value="<?= $_SERVER['HTTP_COOKIE'] ?>" />
+<input type="hidden" name="_xsrf" value="@if(isset($_SERVER['HTTP_COOKIE'])){{ $_SERVER['HTTP_COOKIE'] }}@endif" />
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf
 </form>
+@auth
+    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+    <input type="hidden" name="user_name" value="{{ Auth::user()->name }}" />
+    <input type="hidden" name="usertok" value="{{ $usertok }}" />
+@endauth
 
 <div class="navbar">
     <div class="navbar-inner">
