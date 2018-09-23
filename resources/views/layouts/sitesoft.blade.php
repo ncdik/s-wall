@@ -47,7 +47,7 @@
     </div>
 </div>
 
-@yield('content');
+@yield('content')
 
 </body>
 
