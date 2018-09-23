@@ -407,6 +407,9 @@ abstract class WebsocketWorker
 //пример реализации чата
 class WebsocketHandler extends WebsocketWorker
 {
+    private $site_addr = '127.0.5.1';
+    private $site_protocol = 'http'; //http | https
+
     protected function onOpen($client, $info) {//вызывается при соединении с новым клиентом
         //$this->sendHelper('Присоединился ' . intval($client));
     }
@@ -560,7 +563,7 @@ class WebsocketHandler extends WebsocketWorker
     //отправляет сформированную команду post-запросом через curl в laravel для создания сообщения
     protected function curlSendCreate($client, $msg){
         if($ch = curl_init()){
-            curl_setopt($ch, CURLOPT_URL, 'http://127.0.5.1/msg/create');
+            curl_setopt($ch, CURLOPT_URL, $this->site_protocol.'://'.$this->site_addr.'/msg/create');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
             curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
             curl_setopt($ch, CURLOPT_COOKIE, $this->_xsrfs[intval($client)]);
@@ -583,7 +586,7 @@ class WebsocketHandler extends WebsocketWorker
     //отправляет сформированную команду post-запросом через curl в laravel для редактирования сообщения
     protected function curlSendEdit($client, $msg){
         if($ch = curl_init()){
-            curl_setopt($ch, CURLOPT_URL, 'http://127.0.5.1/msg/edit');
+            curl_setopt($ch, CURLOPT_URL, $this->site_protocol.'://'.$this->site_addr.'/msg/edit');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
             curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
             curl_setopt($ch, CURLOPT_COOKIE, $this->_xsrfs[intval($client)]);
@@ -606,7 +609,7 @@ class WebsocketHandler extends WebsocketWorker
     //отправляет сформированную команду post-запросом через curl в laravel для удаления сообщения
     protected function curlSendDelete($client, $msg){
         if($ch = curl_init()){
-            curl_setopt($ch, CURLOPT_URL, 'http://127.0.5.1/msg/delete');
+            curl_setopt($ch, CURLOPT_URL, $this->site_protocol.'://'.$this->site_addr.'/msg/delete');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
             curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
             curl_setopt($ch, CURLOPT_COOKIE, $this->_xsrfs[intval($client)]);
