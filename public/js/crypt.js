@@ -174,6 +174,14 @@ function sendOnOpen(){
     sendCommand(JSON.stringify(cmd));
 }
 
+function escapeHtml(text) {
+  return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+}
 
 //добавляет открытое сообщение на страницу
 function addOpenMsg(name, message_id, text, data=''){
@@ -185,7 +193,7 @@ function addOpenMsg(name, message_id, text, data=''){
             '<h5>'+name+'</h5>'+
             '<div id="text_view_'+message_id+'">'+
                 '<span id="text_'+message_id+'">'+
-                    text+
+                    escapeHtml(text)+
                 '</span>\n';
 
     if(getUserName() === name){
