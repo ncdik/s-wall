@@ -179,7 +179,7 @@ function sendOnOpen(){
 
 //добавляет открытое сообщение на страницу
 function addOpenMsg(name, message_id, text, data=''){
-    getWellDiv().prepend(
+    var code = 
         '<div class="well" id="div_msg_'+message_id+'">'+
             '<div class="pull-right" style="font-weight: normal; color:silver; font-size:13px">'+
                 'Создано - '+data+
@@ -188,21 +188,26 @@ function addOpenMsg(name, message_id, text, data=''){
             '<div id="text_view_'+message_id+'">'+
                 '<span id="text_'+message_id+'">'+
                     text+
-                '</span>\n'+
-                '<a style="cursor: pointer;" onclick="editMsg('+message_id+')"><i class="fa fa-pencil"></i></a>\n'+
-                '<a style="cursor: pointer;" onclick="sendDeleteMsg('+message_id+')"><i class="fa fa-trash"></i></a>'+
-            '</div>'+
+                '</span>\n';
+
+    if(getUserName() === name){
+        code += '<a style="cursor: pointer;" onclick="editMsg('+message_id+')"><i class="fa fa-pencil"></i></a>\n'+
+                '<a style="cursor: pointer;" onclick="sendDeleteMsg('+message_id+')"><i class="fa fa-trash"></i></a>';
+    }
+
+    code +=     '</div>'+
             '<div id="text_edit_'+message_id+'" hidden>'+
                 '<input id="e_text_'+message_id+'" value="'+text+'" />'+
                 '<button onclick="sendEditOpenMsg('+message_id+')" class="btn btn-primary">Применить</button>'+
                 '<button onclick="cancelEditOpenMsg('+message_id+')" class="btn btn-danger">Отмена</button>'+
             '</div>'+
-        '</div>'
-    );
+        '</div>';
+
+    getWellDiv().prepend(code);
 }
 //добавляет шифрованное сообщение на страницу
 function addCryptedMsg(name, message_id, text, data=''){
-    getWellDiv().prepend(
+    var code = 
         '<div class="well" id="div_msg_'+message_id+'">'+
             '<div class="pull-right" style="font-weight: normal; color:silver; font-size:13px">'+
                 'Создано - '+data+
@@ -210,15 +215,20 @@ function addCryptedMsg(name, message_id, text, data=''){
             '<h5>'+name+'</h5>'+
             '<span id="text_'+message_id+'">'+
                 '###'+
-            '</span>\n'+
-            '<a style="cursor: pointer;" onclick="sendDeleteMsg('+message_id+');"><i class="fa fa-trash"></i></a>'+
-            '<div class="form-horizontal">'+
+            '</span>\n';
+
+    if(getUserName() === name){
+        code += '<a style="cursor: pointer;" onclick="sendDeleteMsg('+message_id+');"><i class="fa fa-trash"></i></a>';
+    }
+
+    code += '<div class="form-horizontal">'+
                 '<label class="label" for="key_'+message_id+'">Ключ</label>&nbsp;'+
                 '<input type="password" id="key_'+message_id+'" class="input input-large">&nbsp;'+
                 '<button class="btn btn-primary" onclick="filldiv(\''+message_id+'\',\''+text+'\');">Расшифровать</button>'+
             '</div>'+
-        '</div>'
-    );
+        '</div>';
+
+    getWellDiv().prepend(code);
 }
 //изменяет содержимое отрытого сообщения
 function editOpenMsg(id, text){ $('#text_'+id).text(text); }
