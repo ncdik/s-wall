@@ -23,7 +23,7 @@ class="active"
 
 
                 <div class="control-group">
-                    <textarea style="width: 100%; height: 50px;" maxlength="500" type="password" id="inputText" placeholder="Ваше сообщение..."
+                    <textarea style="width: 100%; height: 50px;" maxlength="400" type="password" id="inputText" placeholder="Ваше сообщение..."
                            data-cip-id="inputText"></textarea>
                 </div>
                 <div class="control-group">
