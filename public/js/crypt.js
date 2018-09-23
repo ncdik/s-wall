@@ -13,7 +13,6 @@ function crypt_main(text, textkey) {
     return JSON.stringify(atmp);
 }
 
-//функция расшифровки
 function decrypt_main(text, textkey) {
     var arr = JSON.parse(text);
     var akey = md5(textkey).split('');
@@ -334,6 +333,10 @@ function hideErrorMessage(){ $('#error_message').hide(); }
 function showErrorKey(){ $('#error_key').show(); }
 //скрывает ошибку ввода ключа
 function hideErrorKey(){ $('#error_key').hide(); }
+//отображает ошибку соединения с сервером WS
+function showErrorWS() { $('#error_ws').show(); }
+//скрывает ошибку соединения с сервером WS
+function hideErrorWS() { $('#error_ws').hide(); }
 
 //инициализирует WebSocket
 function tstart(address, port){
@@ -341,4 +344,11 @@ function tstart(address, port){
     ws.onmessage = function(data) { onMessage(data); };
     ws.onopen = function(data) { sendOnOpen(); };
     return ws;
+}
+
+//проверяет соединение с сервером WS
+function checkWS(WS){
+    if(WS.readyState !== 1){
+        showErrorWS();
+    }
 }

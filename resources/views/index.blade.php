@@ -8,6 +8,10 @@ class="active"
 <div class="row-fluid">
     <div class="span2"></div>
     <div class="span8">
+        <div id="error_ws" class="alert alert-error" hidden>
+            Отсутствует подключение к websocket-серверу.<br>
+            Обновите страницу для повторной попытки подключения.
+        </div>
         @auth
             <form action="" method="post" class="form-horizontal" style="margin-bottom: 50px;">
                 <div id="error_message" class="alert alert-error" hidden>
@@ -16,6 +20,7 @@ class="active"
                 <div id="error_key" class="alert alert-error" hidden>
                     Ключ не может быть пустым
                 </div>
+
 
                 <div class="control-group">
                     <textarea style="width: 100%; height: 50px;" maxlength="500" type="password" id="inputText" placeholder="Ваше сообщение..."

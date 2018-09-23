@@ -9,7 +9,6 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/md5.js') }}"></script>
     <script src="{{ asset('js/crypt.js') }}"></script>
-    <script>var WS = tstart('{{ env('WS_ADDR', 'localhost') }}', '{{ env('WS_PORT', '8000') }}');</script>
 </head>
 <body>
 
@@ -51,4 +50,10 @@
 @yield('content');
 
 </body>
+
+<script>
+    var WS = tstart('{{ env('WS_ADDR', 'localhost') }}', '{{ env('WS_PORT', '8000') }}');
+    setTimeout(function(){ checkWS(WS); }, 2000);
+</script>
+
 </html>
