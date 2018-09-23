@@ -9,7 +9,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/md5.js') }}"></script>
     <script src="{{ asset('js/crypt.js') }}"></script>
-    <script>var WS = tstart('192.168.2.142', '8000');</script>
+    <script>var WS = tstart('{{ env('WS_ADDR', 'localhost') }}', '{{ env('WS_PORT', '8000') }}');</script>
 </head>
 <body>
 
