@@ -7,11 +7,9 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" media="screen">
     <script src="{{ asset('js/jquery-min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @auth
-        <script src="{{ asset('js/md5.js') }}"></script>
-        <script src="{{ asset('js/crypt.js') }}"></script>
-        <script>var WS = tstart('192.168.2.142', '8000');</script>
-    @endauth
+    <script src="{{ asset('js/md5.js') }}"></script>
+    <script src="{{ asset('js/crypt.js') }}"></script>
+    <script>var WS = tstart('192.168.2.142', '8000');</script>
 </head>
 <body>
 
@@ -24,6 +22,10 @@
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
     <input type="hidden" name="user_name" value="{{ Auth::user()->name }}" />
     <input type="hidden" name="usertok" value="{{ $usertok }}" />
+@else
+    <input type="hidden" name="user_id" value="---" />
+    <input type="hidden" name="user_name" value="---" />
+    <input type="hidden" name="usertok" value="---" />
 @endauth
 
 <div class="navbar">

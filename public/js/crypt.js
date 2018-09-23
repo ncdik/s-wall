@@ -28,7 +28,6 @@ function decrypt_main(text, textkey) {
     var len = atmp.length;
     if (atmp[0] == 'b' && atmp[1] == 'e' && atmp[2] == 'g' && atmp[3] == ':' && atmp[len - 4] == ':' && atmp[len - 3] == 'e' && atmp[len - 2] == 'n' && atmp[len - 1] == 'd') {
         
-        console.log(atmp.slice(4, len - 4).join(''));
         return atmp.slice(4, len - 4).join('');
     }
     return '###';
