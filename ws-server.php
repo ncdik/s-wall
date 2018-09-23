@@ -434,11 +434,9 @@ class WebsocketHandler extends WebsocketWorker
 
     protected function parseCommand($client, $data){
         $tmp = json_decode($data['payload']);
-        //return;
 
         //если JSON_decode прошел успешно
         if($tmp && isset($tmp->type)){
-            error_log('name: '.var_export($tmp, true).chr(10).chr(10), 3, 'tst-error-tmp.log');
             //если пришла информация о новом подключении
             if($tmp->type === 'connectinfo'){
                 //если заполнены все необходимые поля
@@ -455,7 +453,6 @@ class WebsocketHandler extends WebsocketWorker
                 
                 if(isset($tmp->message)){
                     $result = json_decode($this->curlSendCreate($client, ['crypted'=>false, 'text'=>$tmp->message]));
-                    error_log('name: '.var_export($result, true).chr(10).chr(10), 3, 'tst-error-res-464.log');
 
                     if($result && isset($result->status) && $result->status == 'ok' && isset($result->date) && isset($result->message_id)){
                         $this->sendCommand($tmp->type, $tmp->cmd, $client, $result->date, $result->message_id, $tmp->message);
@@ -577,7 +574,6 @@ class WebsocketHandler extends WebsocketWorker
             );
 
             $result = curl_exec($ch);
-            //echo $result;
             curl_close($ch);
             return $result;
         }
@@ -600,7 +596,6 @@ class WebsocketHandler extends WebsocketWorker
             );
 
             $result = curl_exec($ch);
-            //echo $result;
             curl_close($ch);
             return $result;
         }
@@ -622,7 +617,6 @@ class WebsocketHandler extends WebsocketWorker
             );
 
             $result = curl_exec($ch);
-            //echo $result;
             curl_close($ch);
             return $result;
         }
